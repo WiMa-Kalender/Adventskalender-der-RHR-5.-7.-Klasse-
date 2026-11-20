@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Adventskalender der RHR für die 5. - 7. Jahrgangsstufe</title>
+<style id="kstyle">
+:root{--bg:#fdf3e7;--fg:#2b2320;--card:#fff;--red:#b3262e;--green:#1f6b4a;--gold:#e0a526;--mut:#6d5f57;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17202a;--fg:#f6ede4;--card:#223040;--red:#e0555c;--green:#4fb98a;--gold:#f0c24a;--mut:#b9aca3}}
+:root[data-theme="dark"]{--bg:#17202a;--fg:#f6ede4;--card:#223040;--red:#e0555c;--green:#4fb98a;--gold:#f0c24a;--mut:#b9aca3}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"Trebuchet MS",Verdana,system-ui,sans-serif;line-height:1.5}
+header{text-align:center;padding:24px 16px 8px}
+h1{margin:0;font-size:clamp(1.6rem,5vw,2.6rem);color:var(--red)}
+header p{margin:6px 0 0;color:var(--mut)}
+.bar{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;padding:8px 16px;font-size:.9rem;color:var(--mut)}
+main{max-width:860px;margin:0 auto;padding:8px 16px 40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:12px}
+.door{aspect-ratio:1;border:3px solid var(--gold);border-radius:14px;background:linear-gradient(145deg,var(--red),#7d1a20);color:#fff;font:700 1.9rem "Trebuchet MS",Verdana,sans-serif;cursor:pointer;position:relative;box-shadow:0 3px 0 rgba(0,0,0,.25)}
+.door:nth-child(3n){background:linear-gradient(145deg,var(--green),#124632)}
+.door:hover:not(:disabled){transform:translateY(-2px)}
+.door:disabled{opacity:.45;cursor:not-allowed}
+.door.open{background:var(--card);color:var(--fg);border-style:dashed;font-size:1.7rem}
+.door small{display:block;font-size:.7rem;font-weight:400}
+#ov{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:16px;z-index:5}
+#ov.on{display:flex}
+.card{background:var(--card);color:var(--fg);border-radius:18px;max-width:520px;width:100%;max-height:88vh;overflow:auto;padding:22px;border-top:8px solid var(--gold)}
+.art{display:block;width:100%;max-width:340px;margin:8px auto;border-radius:14px}
+.ans{font-size:1.1rem}
+.meme .art{max-width:100%;margin:8px 0}
+.solo header,.solo .bar,.solo main{display:none}
+.solo #ov{background:var(--bg)}
+.tag{display:inline-block;background:var(--green);color:#fff;border-radius:99px;padding:2px 12px;font-size:.8rem}
+.card h2{margin:10px 0 6px;color:var(--red)}
+.big{font-size:4.5rem;text-align:center;line-height:1.1;margin:8px 0}
+.meme{background:#2d3a4a;border-radius:12px;padding:14px 10px;text-align:center;color:#fff;font:900 1.25rem Impact,"Arial Black",sans-serif;text-transform:uppercase;text-shadow:2px 2px 0 #000;margin:10px 0}
+.meme .big{text-shadow:none}
+.card ol,.card ul{padding-left:22px;margin:6px 0}
+.btn{display:inline-block;margin-top:10px;background:var(--red);color:#fff;border:0;border-radius:10px;padding:9px 16px;font:inherit;cursor:pointer;text-decoration:none}
+.btn.alt{background:var(--green)}
+.ans{display:none;font-weight:700;color:var(--green);text-align:center;margin-top:10px}
+.door.hl{border-color:#ffd54a;box-shadow:0 0 0 3px #ffd54a,0 0 18px 4px rgba(255,213,74,.85);animation:glow 2s ease-in-out infinite}
+.door.hl::after{content:"★";position:absolute;top:2px;right:6px;font-size:.9rem;color:#ffd54a}
+@keyframes glow{50%{box-shadow:0 0 0 3px #ffd54a,0 0 6px 1px rgba(255,213,74,.5)}}
+@media (prefers-reduced-motion:reduce){.door.hl{animation:none}}
+.quiz{margin-top:14px;border:3px solid var(--gold);border-radius:16px;padding:14px;background:linear-gradient(145deg,rgba(224,165,38,.16),rgba(224,165,38,.04));text-align:center}
+.quiz b.hd{display:block;color:var(--red);font-size:1.1rem;margin-bottom:6px}
+.quiz p{margin:6px 0}
+.quiz img{width:220px;max-width:70%;height:auto;image-rendering:pixelated;background:#fff;padding:8px;border-radius:10px;border:2px solid #ccc;margin:6px auto;display:block}
+.note{font-size:.8rem;color:var(--mut);margin-top:12px}
+#adm{max-width:860px;margin:0 auto;padding:0 16px}
+.admbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#2b2320;color:#fff;border-radius:14px;padding:10px 12px;margin:8px 0 0}
+.admbar .st{flex:1 1 200px;font-size:.85rem}
+.admbar .btn{margin-top:0;font-size:.85rem;padding:7px 12px}
+.admhint{font-size:.85rem;color:var(--mut);margin:6px 2px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin-top:8px}
+.fld{display:block;margin:10px 0;font-weight:700;font-size:.9rem}
+.inp{display:block;width:100%;margin-top:4px;font:inherit;font-weight:400;padding:8px 10px;border-radius:10px;border:2px solid #c9bdb3;background:var(--bg);color:var(--fg)}
+textarea.inp{resize:vertical}
+.code{height:40vh;font:12px/1.4 monospace}
+.chk{display:flex;gap:8px;align-items:center;margin:10px 0;font-size:.95rem}
+.chk input{width:18px;height:18px}
+.qzbox{border:2px dashed var(--gold);border-radius:12px;padding:2px 12px 10px}
+.qrprev{display:block;max-width:160px;margin:8px 0;background:#fff;padding:6px;border-radius:8px}
+.qrprev:not([src]){display:none}
+.err{color:var(--red);font-weight:700;margin:6px 0;min-height:1.2em}
+</style>
+</head>
+<body>
+<header>
+  <h1>🎄 Adventskalender der RHR 🎄</h1>
+  <p>für die 5. - 7. Jahrgangsstufe · Jeden Tag ein neues Türchen!</p>
+</header>
+<div id="adm"></div>
+<div class="bar"><span id="info"></span></div>
+<main><div class="grid" id="grid"></div></main>
+<div id="ov"><div class="card" id="card"></div></div>
+<script id="daten">
+// ===== INHALTE DES KALENDERS =====
+// Am einfachsten bearbeitest du alles im Admin-Modus (siehe README) und lädst danach die neue Datei hoch.
+// k = Art: z Quiz, f Funfact, j Flachwitz, q Rätsel, s Liedtipp, m Meme
+// t Titel, e Emoji, b Text (Witz/Rätsel: Frage; Meme: "oben|unten"), a Antwort/Lösung, h Tipp, q YouTube-Suchbegriff
+// hl = 1 hebt das Türchen hervor; qr = QR-Bild, ql = Link, qt = Text im Quiz-Kasten
+// ADMIN_HASH = verschlüsseltes Admin-Passwort (im Admin-Modus änderbar)
+var ADMIN_HASH="1bb5a4c7809c6a911364bd99f879ea489eb4505026adb7ef386ed203ca0f90d9";
+var D=[
+// Türchen 1 – Quiz
+{"k":"z","t":"Los geht's: Das große Weihnachtsquiz!","e":"🎄","b":"","hl":1,"qr":"iVBORw0KGgoAAAANSUhEUgAAASgAAAEoAQAAAADDfFG0AAABd0lEQVR42u2Zy27EMAwDyaL//8vTg+RHEm/QYwtwD0E24GlAyZRl9Ivfl6KKKqqo/prqW5Jc77gemP1reN15qflgIckFTotaeF15yc1M013sX8PrqLJAYnFK//rgrw2Z7rDC68lrEsJbJyO8zrw8aSEZYby+htdWf9yKsVDdijK8rvmLESLETBf918lfx35fpSi5yFH4HH8deFXTsqiQ6j17Ja8+VX0mVl3KsiuK2W2w8HrWY1mswa2WT3gd8kRXJGa+trXS7595wp1T1ZDG3D2OgfC693uPAXs4y31Bkf51Vhl7GWyLq+lfh/PRwhSrfmIsO3nipILyF7INY0Zi3IWF1yNPdLxH17hK+texHqmBcdxKUFZrgOH1nIcaDIZ1/zUvL8LruB9alzodzeKvswqA3qWJdbsKyRMv+6GahoRRTdqjIMPrqMLVugpUeS7563U/RFNzLz7ir7f90JwhuyaTv173QxMVF8OF14f9UDp5VFFF9Y9UP/nJrGeeTUtKAAAAAElFTkSuQmCC","ql":"https://forms.gle/6GnbsWJ58ZENTGSAA","qt":"Dies ist Quiz 1 von 3, die sich in diesem Kalender verbergen. Wer von euch insgesamt die meisten Fragen richtig beantwortet hat, erhält am 22.12. einen Preis. Was es sein wird, lasst euch überraschen!"},
+// Türchen 2 – Rätsel
+{"k":"q","t":"Wer bin ich?","e":"🕯️","b":"Ich habe vier Kerzen, aber keinen Geburtstag. Jeden Sonntag im Advent brennt eine mehr. Was bin ich?","h":"Ich bin rund und oft aus Tannenzweigen gemacht.","a":"Der Adventskranz! 🎄"},
+// Türchen 3 – Liedtipp
+{"k":"s","t":"Last Christmas","e":"🎧","b":"Der Klassiker von Wham! aus dem Jahr 1984 – läuft jedes Jahr gefühlt überall. Perfekt zum Mitsummen.","q":"Wham Last Christmas"},
+// Türchen 4 – Funfact
+{"k":"f","t":"Der erste Adventskalender","e":"📅","b":"Den ersten gedruckten Adventskalender gab es 1908. Er kam von einem Verleger aus <b>München<\/b>: Gerhard Lang. Vorher haben Familien einfach Striche an die Wand gemalt oder täglich eine Kerze angezündet."},
+// Türchen 5 – Flachwitz
+{"k":"j","t":"Müder Kranz","e":"🕯️","b":"Warum ist der Adventskranz im Dezember so müde?","a":"Er ist völlig ausgebrannt! 🕯️"},
+// Türchen 6 – Funfact
+{"k":"f","t":"Ältester Weihnachtsmarkt","e":"🎪","b":"Der Dresdner Striezelmarkt startete <b>1434<\/b> und gilt als ältester Weihnachtsmarkt Deutschlands. Sein Name kommt vom „Striezel“, einem alten Wort für Weihnachtsgebäck (Stollen)."},
+// Türchen 7 – Flachwitz
+{"k":"j","t":"Schornstein-Alarm","e":"🎅","b":"Was sagt der Weihnachtsmann, wenn er im Schornstein feststeckt?","a":"„Ho-ho-hol mich hier raus!“ 🎅"},
+// Türchen 8 – Quiz
+{"k":"z","t":"Weiter geht's: Das große Weihnachtsquiz!","e":"🎄","b":"","hl":1,"qr":"iVBORw0KGgoAAAANSUhEUgAAASgAAAEoAQAAAADDfFG0AAABd0lEQVR42u2ZyW4DMQxDyaL//8vsgfI2kZMeW4A5TGYMnh600BKFX/y+EFVUUUX111TfAEC/i/LHfAEAhdeTF1TUaFIAoXUaXk9eoOmIpqfjNLwuKlGCQAJk6tdHFZ2TDrXwepOPqiddxKrkK7x6XpV8FFS0ttPw2lNQ5xeHmUg+3nlRFUvaeiJVmRleLyoCkAYt0ieclS28HipCcCpWbxwtMv6rUUkqR1+2a7sgxd+3/VG+DGn1ShBS6v3Nf23ICPiP6Y+9n3CZt++SydVt2+4ivA4VIZCSDeuBMfHV+a8KL8xxjk43G16nyskojZFXlX2OfhleL/E1LUQ9ZIOP1K+W10pGuuBjlv7w6lTyZIKjltWFKPnY+C+ty7bAqvLLVITXZT8Esep8DVrjJz7th+b1uzZEzHzi7X5INfJagZb+eFeVZzUyTUMWXs/4WrdujiXkeg2vy37IA+jlXSex8Or3Qw6rOQSbO7Xw6vdDqeRRRRXV/1H9AFUJq1rt6YZJAAAAAElFTkSuQmCC","ql":"https://forms.gle/QimksYWLYvu8Soo68","qt":"Dies ist Quiz 2 von 3, die sich in diesem Kalender verbergen. Wer von euch insgesamt die meisten Fragen richtig beantwortet hat, erhält am 22.12. einen Preis. Was es sein wird, lasst euch überraschen!"},
+// Türchen 9 – Liedtipp
+{"k":"s","t":"All I Want for Christmas Is You","e":"🎤","b":"Mariah Carey, 1994. Das Lied kommt jedes Jahr wieder in die Charts. Teste in der Klasse: Wer kann den Refrain am besten mitsingen?","q":"Mariah Carey All I Want for Christmas Is You"},
+// Türchen 10 – Funfact
+{"k":"f","t":"Rudolph ist ein Werbetrick","e":"🦌","b":"Das Rentier mit der roten Nase wurde <b>1939<\/b> für ein Kaufhaus in den USA erfunden – als Geschichte für Kinder zum Verschenken. Erst danach wurde Rudolph weltberühmt."},
+// Türchen 11 – Meme
+{"k":"m","t":"Das Plätzchen-Verhör","e":"🍪","b":"Mama: „Wer hat die ganzen Plätzchen gegessen?“|Ich: „Keine Ahnung …“"},
+// Türchen 12 – Funfact
+{"k":"f","t":"Christbaumkugeln","e":"🔮","b":"Die ersten Christbaumkugeln aus Glas wurden im 19. Jahrhundert in Lauscha in Thüringen gemacht. Vorher hingen Äpfel und Nüsse am Baum – das Glas war die schickere Version."},
+// Türchen 13 – Rätsel
+{"k":"q","t":"Rechenrätsel","e":"🎁","b":"Der Weihnachtsmann hat 5 Säcke. In jedem Sack stecken 24 Geschenke. 100 Geschenke hat er schon verteilt. Wie viele hat er noch?","h":"Erst malnehmen, dann abziehen.","a":"5 × 24 = 120 und 120 − 100 = <b>20 Geschenke<\/b> 🎁"},
+// Türchen 14 – Liedtipp
+{"k":"s","t":"Driving Home for Christmas","e":"🚗","b":"Chris Rea. Ein ruhiger, gemütlicher Song über die Heimfahrt zu Weihnachten – ideal für die Autofahrt zur Oma.","q":"Chris Rea Driving Home for Christmas"},
+// Türchen 15 – Quiz
+{"k":"z","t":"Endspurt: Das große Weihnachtsquiz!","e":"🎄","b":"","hl":1,"qr":"iVBORw0KGgoAAAANSUhEUgAAASgAAAEoAQAAAADDfFG0AAABcElEQVR42u2ZQW7FIBBD/are/8ruYgZCUoL+spWcFUFePQ3GzGB98H0pqqiiiuqvqb4liVpbGFnISJ674fXgJQ9qDG5i2Q2vB6+mU8WFC5cms/B6V1mWkUPiIxUCJOHwOpzHR2o1xstueN15sXIqVstueD14+XdpyetueE2/siQ8csSosM5guR/f68uascvXZVlAw+umAsmCGcOozDpZhtdNZdlg18nE401k2vPD6+5f5V3qoNq/HfjDa/N+RDdGIEP86/08IlFGJoFl6pDGv3Z+f2tS2GOFHf/a+le71hK92vzjX3tel+8v9j/DfnjdVb6uRSTZSK7cGv/aqVDFri6v4f+Kf+1V7ssReRQZFfTTj/7tX+sPnVp7nXnHYT7UY6Fu3+P0J87zoe5PXC+j5PvjfGiGMI3DmHy/5zUNrPpf4x1E6uvIa/TtPS7G5K/TfKhaXvZM9iR/neZD5feziT+eSeH1kr+S3KOKKqp/pPoBKxy1YfLqh2gAAAAASUVORK5CYII=","ql":"https://forms.gle/M7y7gxWh9xmc8pC28","qt":"Dies ist Quiz 3 von 3, die sich in diesem Kalender verbergen. Wer von euch insgesamt die meisten Fragen richtig beantwortet hat, erhält am 22.12. einen Preis. Was es sein wird, lasst euch überraschen!"},
+// Türchen 16 – Funfact
+{"k":"f","t":"Stille Nacht um die Welt","e":"🌍","b":"„Stille Nacht, heilige Nacht“ wurde <b>1818<\/b> in Oberndorf bei Salzburg zum ersten Mal gespielt – mit Gitarre, weil die Orgel kaputt war. Heute gibt es das Lied in mehr als 300 Sprachen."},
+// Türchen 17 – Rätsel
+{"k":"q","t":"Geschenke-Logik: Level 2","e":"🧠","b":"Vier Geschenke liegen in einer Reihe: rot, grün, blau und gelb.<ol><li>Das blaue liegt nicht außen.<\/li><li>Das grüne liegt direkt rechts neben dem blauen.<\/li><li>Das rote liegt links vom gelben, aber nicht direkt daneben.<\/li><\/ol>In welcher Reihenfolge liegen sie, von links nach rechts?","h":"Fang beim blauen Geschenk an: Auf welchen zwei Plätzen kann es liegen?","a":"<b>Rot – Blau – Grün – Gelb<\/b> 🎁"},
+// Türchen 18 – Meme
+{"k":"m","t":"Mein Gesicht","e":"🥳","b":"Mein Gesicht, wenn der Wecker klingelt …|… und wenn die Weihnachtsferien beginnen"},
+// Türchen 19 – Flachwitz
+{"k":"j","t":"Lebkuchenmann","e":"🍪","b":"Warum hat der Lebkuchenmann schlechte Laune?","a":"Weil immer einer an ihm knabbert! 😠🍪"},
+// Türchen 20 – Liedtipp
+{"k":"s","t":"In der Weihnachtsbäckerei","e":"🧁","b":"Rolf Zuckowski – das deutsche Lied über das Plätzchenbacken. Passt perfekt zu den Rezepten aus diesem Kalender.","q":"Rolf Zuckowski In der Weihnachtsbäckerei"},
+// Türchen 21 – Flachwitz
+{"k":"j","t":"Pinguin-Witz","e":"🐧","b":"Wo trinkt ein Pinguin seinen Punsch?","a":"An der Eisbar! 🧊🐧"},
+// Türchen 22 – Funfact
+{"k":"f","t":"Rentier-Damen","e":"🦌","b":"Rentier-Männchen verlieren ihr Geweih meist schon im Winter, die Weibchen behalten es bis ins Frühjahr. Wenn die Rentiere vom Weihnachtsmann also Geweih tragen, sind es vermutlich <b>Rentier-Damen<\/b>! 🦌"},
+// Türchen 23 – Funfact
+{"k":"f","t":"Weihnachtsbäume früher","e":"🌲","b":"Schon 1419 wird in Freiburg ein geschmückter Baum erwähnt – er hing voller Obst und Nüsse. Kerzen kamen erst viel später dazu."},
+// Türchen 24 – Flachwitz
+{"k":"j","t":"Zum Schluss","e":"🎄","b":"Was sagt die Lichterkette am Heiligabend?","a":"„Ich bin heute total erleuchtet!“ 💡 Frohe Weihnachten! 🎅"}
+];
+var MR={
+ "6": "<svg class='art' viewBox='0 0 200 130'><rect width='100' height='130' fill='#ffd9d9'/><rect x='100' width='100' height='130' fill='#d9d9d9'/><text x='50' y='14' font-size='11' text-anchor='middle' font-weight='700' fill='#333'>Erwartung<\/text><text x='150' y='14' font-size='11' text-anchor='middle' font-weight='700' fill='#333'>Realität<\/text><g transform='translate(28,38)'><rect y='20' width='26' height='50' rx='4' fill='#b3262e'/><rect y='58' width='46' height='18' rx='8' fill='#b3262e'/><rect y='20' width='26' height='6' fill='#fff'/><\/g><circle cx='34' cy='54' r='6' fill='#ffd23a'/><circle cx='44' cy='48' r='6' fill='#4fb98a'/><circle cx='52' cy='55' r='5' fill='#ff6fa5'/><circle cx='42' cy='40' r='5' fill='#5ab0ff'/><rect x='30' y='30' width='4' height='20' fill='#fff' transform='rotate(-20 32 40)'/><text x='58' y='40' font-size='16'>⭐<\/text><g transform='translate(128,38)'><rect y='20' width='26' height='50' rx='4' fill='#b3262e'/><rect y='58' width='46' height='18' rx='8' fill='#b3262e'/><rect y='20' width='26' height='6' fill='#fff'/><\/g><circle cx='141' cy='52' r='8' fill='#ff9a1a'/><path d='M141 44 q4-6 8-4' stroke='#2a7a3a' stroke-width='3' fill='none'/><\/svg>",
+ "11": "<svg class='art' viewBox='0 0 200 130'><rect width='200' height='130' fill='#fff1d6'/><ellipse cx='100' cy='110' rx='82' ry='14' fill='#fff' stroke='#ccc'/><circle cx='50' cy='108' r='2.5' fill='#8a5a2b'/><circle cx='70' cy='114' r='2' fill='#8a5a2b'/><circle cx='130' cy='110' r='3' fill='#8a5a2b'/><circle cx='152' cy='113' r='2' fill='#8a5a2b'/><circle cx='100' cy='58' r='36' fill='#ffd9a0' stroke='#c99a5a'/><circle cx='86' cy='52' r='8' fill='#fff'/><circle cx='114' cy='52' r='8' fill='#fff'/><circle cx='90' cy='52' r='3.5'/><circle cx='118' cy='52' r='3.5'/><path d='M76 40 L94 44 M124 40 L106 44' stroke='#6b4a2a' stroke-width='3'/><path d='M88 78 q6-5 12 0 t12 0' stroke='#6b4a2a' stroke-width='3' fill='none'/><circle cx='80' cy='68' r='2.5' fill='#8a5a2b'/><circle cx='122' cy='72' r='2.5' fill='#8a5a2b'/><circle cx='112' cy='84' r='2' fill='#8a5a2b'/><path d='M142 30 q6 10 0 16 q-6-6 0-16Z' fill='#5ab0ff'/><\/svg>",
+ "18": "<svg class='art' viewBox='0 0 200 130'><rect width='100' height='130' fill='#b8c4de'/><rect x='100' width='100' height='130' fill='#ffe27a'/><circle cx='50' cy='70' r='30' fill='#ffd9a0' stroke='#c99a5a'/><path d='M36 64 h12 M54 64 h12' stroke='#333' stroke-width='3'/><path d='M38 88 h24' stroke='#333' stroke-width='3'/><path d='M36 72 q6 4 12 0 M54 72 q6 4 12 0' stroke='#8a7aa0' stroke-width='2' fill='none'/><text x='78' y='34' font-size='13' font-weight='700' fill='#334'>Zzz<\/text><text x='8' y='16' font-size='11' font-weight='700' fill='#334'>6:30 Uhr<\/text><circle cx='150' cy='70' r='30' fill='#ffd9a0' stroke='#c99a5a'/><path d='M136 66 q6-8 12 0 M154 66 q6-8 12 0' stroke='#333' stroke-width='3' fill='none'/><path d='M134 80 q16 20 32 0Z' fill='#fff' stroke='#333' stroke-width='2'/><rect x='112' y='14' width='6' height='6' fill='#e0555c'/><rect x='170' y='24' width='6' height='6' fill='#4fb98a'/><rect x='186' y='60' width='6' height='6' fill='#5ab0ff'/><rect x='116' y='104' width='6' height='6' fill='#b3262e'/><rect x='176' y='106' width='6' height='6' fill='#e0555c'/><text x='108' y='16' font-size='11' font-weight='700' fill='#553' opacity='0'>.<\/text><text x='150' y='122' font-size='10' text-anchor='middle' font-weight='700' fill='#553'>Ferien!<\/text><\/svg>"
+};
+var AR={
+ "2": "<svg class='art' viewBox='0 0 200 140'><rect width='200' height='140' fill='#cfe8ff'/><rect y='108' width='200' height='32' fill='#fff'/><circle cx='70' cy='92' r='26' fill='#fff' stroke='#9bb'/><circle cx='70' cy='56' r='19' fill='#fff' stroke='#9bb'/><circle cx='63' cy='52' r='3'/><circle cx='77' cy='52' r='3'/><rect x='56' y='30' width='28' height='7' fill='#333'/><rect x='62' y='14' width='16' height='18' fill='#333'/><circle cx='70' cy='85' r='2'/><circle cx='70' cy='96' r='2'/><ellipse cx='150' cy='100' rx='18' ry='14' fill='#c9a27a'/><circle cx='162' cy='86' r='10' fill='#c9a27a'/><ellipse cx='160' cy='68' rx='3.5' ry='12' fill='#c9a27a'/><ellipse cx='168' cy='68' rx='3.5' ry='12' fill='#c9a27a'/><circle cx='165' cy='84' r='1.8'/><polygon points='170,88 192,92 170,95' fill='#ff7a1a'/><\/svg>",
+ "7": "<svg class='art' viewBox='0 0 200 140'><rect width='200' height='140' fill='#1c2b4a'/><circle cx='164' cy='28' r='12' fill='#fff7c2'/><rect y='120' width='200' height='20' fill='#fff'/><rect x='70' y='60' width='60' height='62' fill='#a4442a'/><path d='M70 78H130M70 96H130M70 114H130M90 60V78M110 78V96M90 96V114' stroke='#6e2a18' stroke-width='2'/><rect x='64' y='54' width='72' height='9' fill='#7d3320'/><rect x='80' y='24' width='14' height='32' fill='#c4151c' transform='rotate(-12 87 40)'/><rect x='108' y='24' width='14' height='32' fill='#c4151c' transform='rotate(12 115 40)'/><rect x='72' y='10' width='24' height='16' rx='4' fill='#222' transform='rotate(-12 85 17)'/><rect x='106' y='10' width='24' height='16' rx='4' fill='#222' transform='rotate(12 117 17)'/><text x='140' y='30' font-size='13' fill='#fff'>Hilfe!<\/text><\/svg>",
+ "13": "<svg class='art' viewBox='0 0 200 140'><rect width='200' height='140' fill='#ffe9c7'/><rect x='10' y='96' width='180' height='8' fill='#8a5a2b'/><rect x='30' y='104' width='8' height='30' fill='#8a5a2b'/><rect x='162' y='104' width='8' height='30' fill='#8a5a2b'/><circle cx='60' cy='76' r='20' fill='#fff' stroke='#9bb'/><circle cx='60' cy='44' r='15' fill='#fff' stroke='#9bb'/><circle cx='55' cy='41' r='2.5'/><circle cx='65' cy='41' r='2.5'/><polygon points='60,45 76,48 60,50' fill='#ff7a1a'/><ellipse cx='125' cy='90' rx='32' ry='7' fill='#fff' stroke='#bbb'/><ellipse cx='125' cy='85' rx='18' ry='10' fill='#d98a5a'/><rect x='140' y='76' width='24' height='7' rx='3' fill='#f3e6d0' transform='rotate(-20 150 80)'/><path d='M80 70 L106 82' stroke='#6b4a2a' stroke-width='3'/><\/svg>",
+ "17": "<svg class='art' viewBox='0 0 200 140'><rect width='200' height='140' fill='#1c2b4a'/><circle cx='100' cy='70' r='52' fill='#ffd2d2' opacity='.3'/><path d='M80 50 L60 15 M70 32 L52 30 M120 50 L140 15 M130 32 L148 30' stroke='#8a5a2b' stroke-width='5' stroke-linecap='round'/><ellipse cx='100' cy='80' rx='30' ry='34' fill='#a0693a'/><circle cx='88' cy='72' r='5' fill='#fff'/><circle cx='112' cy='72' r='5' fill='#fff'/><circle cx='89' cy='73' r='2.5'/><circle cx='111' cy='73' r='2.5'/><circle cx='100' cy='92' r='10' fill='#ff2b2b'/><path d='M92 108 Q100 114 108 108' stroke='#3a2412' stroke-width='3' fill='none'/><\/svg>",
+ "21": "<svg class='art' viewBox='0 0 200 140'><rect width='200' height='140' fill='#bfe3ff'/><rect y='118' width='200' height='22' fill='#fff'/><ellipse cx='90' cy='84' rx='34' ry='40' fill='#222'/><ellipse cx='90' cy='92' rx='22' ry='30' fill='#fff'/><circle cx='80' cy='60' r='4' fill='#fff'/><circle cx='100' cy='60' r='4' fill='#fff'/><circle cx='81' cy='61' r='2'/><circle cx='99' cy='61' r='2'/><polygon points='84,68 96,68 90,78' fill='#ff9a1a'/><path d='M62 46 Q90 22 118 46Z' fill='#c4151c'/><circle cx='90' cy='24' r='5' fill='#fff'/><ellipse cx='78' cy='124' rx='10' ry='5' fill='#ff9a1a'/><ellipse cx='102' cy='124' rx='10' ry='5' fill='#ff9a1a'/><rect x='128' y='78' width='26' height='28' rx='4' fill='#fff' stroke='#c4151c' stroke-width='3'/><rect x='130' y='82' width='22' height='20' fill='#b3262e'/><path d='M154 84 q12 0 0 14' stroke='#c4151c' stroke-width='3' fill='none'/><path d='M135 70 q-4-8 0-14 M146 70 q-4-8 0-14' stroke='#fff' stroke-width='2' fill='none'/><path d='M118 84 L130 88' stroke='#222' stroke-width='6' stroke-linecap='round'/><\/svg>"
+};
+</script>
+<script id="prog">
+(function(){
+var L={z:"⭐ Quiz",f:"💡 Funfact",j:"😂 Flachwitz",q:"🧩 Rätsel",s:"🎵 Liedtipp",m:"🤪 Meme",r:"🍪 Rezept"};
+var NAMES={z:"Quiz",f:"Funfact",j:"Flachwitz",q:"Rätsel",s:"Liedtipp",m:"Meme",r:"Rezept"};
+var KS=[["z","⭐ Quiz"],["f","💡 Funfact"],["j","😂 Flachwitz"],["q","🧩 Rätsel"],["s","🎵 Liedtipp"],["m","🤪 Meme"]];
+var HEAD="// ===== INHALTE DES KALENDERS =====\n// Am einfachsten bearbeitest du alles im Admin-Modus (siehe README) und lädst danach die neue Datei hoch.\n// k = Art: z Quiz, f Funfact, j Flachwitz, q Rätsel, s Liedtipp, m Meme\n// t Titel, e Emoji, b Text (Witz/Rätsel: Frage; Meme: \"oben|unten\"), a Antwort/Lösung, h Tipp, q YouTube-Suchbegriff\n// hl = 1 hebt das Türchen hervor; qr = QR-Bild, ql = Link, qt = Text im Quiz-Kasten\n// ADMIN_HASH = verschlüsseltes Admin-Passwort (im Admin-Modus änderbar)\n";
+var BODY='<header>\n  <h1>🎄 Adventskalender der RHR 🎄</h1>\n  <p>für die 5. - 7. Jahrgangsstufe · Jeden Tag ein neues Türchen!</p>\n</header>\n<div id="adm"></div>\n<div class="bar"><span id="info"></span></div>\n<main><div class="grid" id="grid"></div></main>\n<div id="ov"><div class="card" id="card"></div></div>';
+var $=function(i){return document.getElementById(i)};
+var grid=$("grid"),ov=$("ov"),card=$("card"),info=$("info"),adm=$("adm");
+function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}}
+var seen={};try{seen=JSON.parse(ls("adv")||"{}")||{}}catch(e){seen={}}
+function saveSeen(){ls("adv",JSON.stringify(seen))}
+var ADM=false,dirty=false,editing=false;
+var LIVE_HASH=ADMIN_HASH;
+var solo=/^#tuerchen-\d+$/.test(location.hash);
+if(solo)document.body.classList.add("solo");
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function qrSrc(q){return /^data:/.test(q)?q:"data:image/png;base64,"+q}
+function yt(q){return "https://www.youtube.com/results?search_query="+encodeURIComponent(q)}
+function isOpen(n){if(ADM)return true;var d=new Date();return d.getMonth()===0||d>=new Date(d.getFullYear(),11,n)}
+function quizNr(n){var c=0,t=0;D.forEach(function(x,i){if(x.qr){t++;if(i<n)c=t}});return [c,t]}
+
+function draw(){
+  grid.innerHTML="";var c=0;
+  D.forEach(function(x,i){
+    var n=i+1,op=isOpen(n),b=document.createElement("button");
+    b.type="button";
+    b.className="door"+(seen[n]?" open":"")+(x.hl?" hl":"");
+    b.disabled=!op;
+    b.setAttribute("aria-label","Türchen "+n+(op?"":" (noch geschlossen)"));
+    b.innerHTML=seen[n]?esc(x.e)+"<small>"+n+"</small>":n+(op?"":"<small>🔒</small>");
+    if(seen[n])c++;
+    b.onclick=function(){location.hash="tuerchen-"+n};
+    grid.appendChild(b);
+  });
+  info.textContent=ADM?"Admin-Modus: alle Türchen sind offen":c+" von 24 Türchen geöffnet";
+}
+
+function show(n){
+  var x=D[n-1],h='<span class="tag">'+L[x.k]+' · Türchen '+n+'</span><h2>'+x.t+'</h2>';
+  if(x.k==="m"){var p=(x.b||"").split("|");h+='<div class="meme">'+p[0]+(MR[n]||'<div class="big">'+x.e+'</div>')+(p[1]||"")+'</div>'}
+  else if(x.k==="j"){h+=(AR[n]||'<div class="big">'+x.e+'</div>')+'<p>'+x.b+'</p><div style="text-align:center"><button class="btn alt" id="rv">Antwort zeigen</button></div><div class="ans" id="an">'+x.a+'</div>'}
+  else if(x.k==="q"){h+='<div class="big">'+x.e+'</div><p>'+x.b+'</p>'+(x.h?'<p class="note" id="hn" style="display:none">💡 Tipp: '+x.h+'</p>':'')+'<div style="text-align:center">'+(x.h?'<button class="btn" id="hb">Tipp zeigen</button> ':'')+'<button class="btn alt" id="rv">Lösung zeigen</button></div><div class="ans" id="an">'+x.a+'</div>'}
+  else{h+='<div class="big">'+x.e+'</div>'+(x.b?'<p>'+x.b+'</p>':'')}
+  if(x.k==="s"&&x.q)h+='<a class="btn" target="_blank" rel="noopener" href="'+yt(x.q)+'">▶ Auf YouTube anhören</a><p class="note">Bitte nur mit Erlaubnis von Lehrkraft oder Eltern öffnen.</p>';
+  if(x.qr){var qn=quizNr(n);h+='<div class="quiz"><b class="hd">⭐ Weihnachtsquiz '+qn[0]+' von '+qn[1]+' ⭐</b>'+(x.qt?'<p>'+x.qt+'</p>':'')+'<img alt="QR-Code zum Weihnachtsquiz '+qn[0]+'" src="'+qrSrc(x.qr)+'">'+(x.ql?'<p style="font-size:.85rem;color:var(--mut)">Scanne den QR-Code oder klicke auf den Button.</p><a class="btn" target="_blank" rel="noopener" href="'+esc(x.ql)+'">📝 Zum Quiz</a>':'<p style="font-size:.85rem;color:var(--mut)">Scanne den QR-Code.</p>')+'<p class="note">Bitte nur mit Erlaubnis von Lehrkraft oder Eltern öffnen.</p></div>'}
+  var btns=(ADM?'<button class="btn alt" id="ed">✏️ Bearbeiten</button>':'')+(solo?'':'<button class="btn" id="cl">Schließen</button>');
+  if(btns)h+='<div class="row">'+btns+'</div>';
+  card.innerHTML=h;ov.classList.add("on");card.scrollTop=0;
+  var hb=$("hb");if(hb)hb.onclick=function(){$("hn").style.display="block";hb.style.display="none"};
+  var rv=$("rv");if(rv)rv.onclick=function(){$("an").style.display="block";rv.style.display="none"};
+  var cl=$("cl");if(cl)cl.onclick=close;
+  var ed=$("ed");if(ed)ed.onclick=function(){edit(n)};
+  if(!ADM){seen[n]=1;saveSeen()}
+}
+function close(){if(solo)return;editing=false;if(location.hash&&location.hash!=="#")location.hash="";else{ov.classList.remove("on");draw()}}
+function route(){
+  if(editing)return;
+  var m=/^#tuerchen-(\d+)$/.exec(location.hash),n=m?+m[1]:0;
+  if(n<1||n>24){ov.classList.remove("on");draw();return}
+  if(isOpen(n))show(n);
+  else{card.innerHTML='<div class="big">🔒</div><h2>Türchen '+n+'</h2><p>Dieses Türchen öffnet sich am <b>'+n+'. Dezember</b>. Komm dann einfach wieder!</p>'+(solo?'':'<div class="row"><button class="btn" id="cl">Schließen</button></div>');ov.classList.add("on");var c2=$("cl");if(c2)c2.onclick=close}
+}
+ov.onclick=function(e){if(e.target===ov&&!editing)close()};
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!editing)close()});
+window.addEventListener("hashchange",route);
+
+/* ===== Admin ===== */
+function h256(t){if(!(window.crypto&&crypto.subtle&&window.TextEncoder))return Promise.reject(new Error("crypto"));return crypto.subtle.digest("SHA-256",new TextEncoder().encode(t)).then(function(b){return Array.prototype.map.call(new Uint8Array(b),function(x){return("0"+x.toString(16)).slice(-2)}).join("")})}
+function draft(){try{return JSON.parse(ls("advDraft")||"null")}catch(e){return null}}
+function closeAdm(){editing=false;ov.classList.remove("on");route()}
+function msgCard(t,html){editing=true;card.innerHTML='<span class="tag">🔧 Admin</span><h2>'+t+'</h2>'+html+'<div class="row"><button class="btn" id="mx">Schließen</button></div>';ov.classList.add("on");$("mx").onclick=closeAdm}
+function login(){
+  if(ADM)return;editing=true;
+  card.innerHTML='<span class="tag">🔧 Admin</span><h2>Anmeldung</h2><form id="lf"><label class="fld">Admin-Passwort<input type="password" id="pw" class="inp" autocomplete="current-password"></label><p class="err" id="er"></p><div class="row"><button class="btn alt" type="button" id="lc">Abbrechen</button><button class="btn" type="submit">Anmelden</button></div></form>';
+  ov.classList.add("on");try{$("pw").focus()}catch(e){}
+  $("lc").onclick=closeAdm;
+  $("lf").onsubmit=function(e){e.preventDefault();h256($("pw").value).then(function(h){var d=draft();if(h===ADMIN_HASH||(d&&h===d.H)){ls("advAdmin",h);editing=false;enter()}else $("er").textContent="Falsches Passwort."},function(){$("er").textContent="Die Anmeldung funktioniert nur über https (z. B. GitHub Pages)."})};
+}
+function apply(o){D.length=0;o.D.forEach(function(x){D.push(x)});MR=o.MR||{};AR=o.AR||{};ADMIN_HASH=o.H||ADMIN_HASH}
+function enter(){
+  ADM=true;solo=false;document.body.classList.remove("solo");document.body.classList.add("admin");
+  var d=draft();
+  if(d&&d.D){if(JSON.stringify([d.D,d.MR,d.AR,d.H])!==JSON.stringify([D,MR,AR,ADMIN_HASH])){apply(d);dirty=true}else ls("advDraft",null)}
+  bar();ov.classList.remove("on");draw();route();
+}
+function persist(){dirty=true;ls("advDraft",JSON.stringify({D:D,MR:MR,AR:AR,H:ADMIN_HASH}));bar()}
+function bar(){
+  adm.innerHTML='<div class="admbar"><b>🔧 Admin-Modus</b><span class="st">'+(dirty?'⚠️ Änderungen noch nicht bei GitHub hochgeladen':'✅ Keine offenen Änderungen')+'</span><button class="btn" id="a_dl">⬇️ Datei herunterladen</button><button class="btn alt" id="a_cd">📋 Code anzeigen</button><button class="btn alt" id="a_pw">🔑 Passwort ändern</button>'+(dirty?'<button class="btn alt" id="a_rs">↩️ Änderungen verwerfen</button>':'')+'<button class="btn alt" id="a_out">🚪 Abmelden</button></div><p class="admhint">Türchen öffnen → „✏️ Bearbeiten“ → Speichern. Zum Schluss „Datei herunterladen“ und damit <b>index.html</b> bei GitHub ersetzen.</p>';
+  $("a_dl").onclick=dl;$("a_cd").onclick=code;$("a_pw").onclick=pwc;
+  $("a_out").onclick=function(){ls("advAdmin",null);if(location.search)location.href=location.pathname;else location.reload()};
+  var rs=$("a_rs");if(rs)rs.onclick=function(){if(rs.getAttribute("data-ok")){ls("advDraft",null);ls("advAdmin",LIVE_HASH);location.reload()}else{rs.setAttribute("data-ok","1");rs.textContent="Wirklich verwerfen? Nochmal klicken"}};
+}
+function J(o,p){return JSON.stringify(o,null,p?1:0).replace(/<\//g,"<\\/")}
+function build(){
+  var data="\n"+HEAD+"var ADMIN_HASH="+J(ADMIN_HASH)+";\nvar D=[\n"+D.map(function(x,i){return "// Türchen "+(i+1)+" – "+(NAMES[x.k]||x.k)+"\n"+J(x)}).join(",\n")+"\n];\nvar MR="+J(MR,1)+";\nvar AR="+J(AR,1)+";\n";
+  return '<!DOCTYPE html>\n<html lang="de">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<title>'+esc(document.title)+'</title>\n<style id="kstyle">'+$("kstyle").textContent+'</style>\n</head>\n<body>\n'+BODY+'\n<script id="daten">'+data+'<\/script>\n<script id="prog">'+$("prog").textContent+'<\/script>\n</body>\n</html>\n';
+}
+window.kalenderDatei=build;
+function dl(){
+  var s=build();
+  try{var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([s],{type:"text/html;charset=utf-8"}));a.download="index.html";document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.parentNode.removeChild(a)},3000)}catch(e){}
+  msgCard("⬇️ Datei erstellt","<p>Die Datei <b>index.html</b> wurde heruntergeladen. Lade sie bei GitHub hoch und ersetze damit die alte Datei. Nach 1–2 Minuten sind die Änderungen online.</p><p class='note'>Kein Download gestartet? Dann nutze „📋 Code anzeigen“ und kopiere den Text.</p>");
+}
+function code(){
+  editing=true;
+  card.innerHTML='<span class="tag">🔧 Admin</span><h2>Code der Seite</h2><p>Kopiere den gesamten Text und ersetze damit den Inhalt von <b>index.html</b> bei GitHub.</p><textarea id="cd" class="inp code" readonly></textarea><p class="err" id="cm"></p><div class="row"><button class="btn alt" id="cx">Schließen</button><button class="btn" id="cp">In Zwischenablage kopieren</button></div>';
+  $("cd").value=build();ov.classList.add("on");
+  $("cx").onclick=closeAdm;
+  $("cp").onclick=function(){var t=$("cd"),ok=false;t.focus();t.select();try{ok=document.execCommand("copy")}catch(e){}
+    var done=function(){$("cm").textContent="✅ Kopiert!"},fail=function(){$("cm").textContent=ok?"✅ Kopiert!":"Bitte den Text markieren und mit Strg+C kopieren."};
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t.value).then(done,fail);else fail()};
+}
+function pwc(){
+  editing=true;
+  card.innerHTML='<span class="tag">🔧 Admin</span><h2>Passwort ändern</h2><form id="pf"><label class="fld">Neues Passwort<input type="password" id="p1" class="inp" autocomplete="new-password"></label><label class="fld">Neues Passwort wiederholen<input type="password" id="p2" class="inp" autocomplete="new-password"></label><p class="err" id="pe"></p><div class="row"><button class="btn alt" type="button" id="px">Abbrechen</button><button class="btn" type="submit">Speichern</button></div></form><p class="note">Das neue Passwort gilt online erst, wenn du die neue Datei bei GitHub hochgeladen hast.</p>';
+  ov.classList.add("on");$("px").onclick=closeAdm;
+  $("pf").onsubmit=function(e){e.preventDefault();var a=$("p1").value,b=$("p2").value;
+    if(a.length<6){$("pe").textContent="Bitte mindestens 6 Zeichen.";return}
+    if(a!==b){$("pe").textContent="Die beiden Passwörter stimmen nicht überein.";return}
+    h256(a).then(function(h){ADMIN_HASH=h;ls("advAdmin",h);persist();msgCard("🔑 Passwort geändert","<p>Lade jetzt die neue Datei herunter und bei GitHub hoch. Bis dahin gilt online noch das alte Passwort.</p>")})};
+}
+function edit(n){
+  editing=true;var x=D[n-1],mm=(x.k==="m"?(x.b||""):"").split("|"),pic=!!(AR[n]||MR[n]),nq=null;
+  var opt=KS.map(function(k){return '<option value="'+k[0]+'"'+(x.k===k[0]?' selected':'')+'>'+k[1]+'</option>'}).join("");
+  function f(id,label,val,forK,area){return '<label class="fld"'+(forK?' data-for="'+forK+'"':'')+'>'+label+(area?'<textarea id="'+id+'" class="inp" rows="4">'+esc(val)+'</textarea>':'<input id="'+id+'" class="inp" value="'+esc(val)+'">')+'</label>'}
+  card.innerHTML='<span class="tag">✏️ Türchen '+n+' bearbeiten</span><h2>'+x.t+'</h2><form id="ef">'+
+    '<label class="fld">Art<select id="f_k" class="inp">'+opt+'</select></label>'+
+    f("f_t","Titel",x.t)+f("f_e","Emoji (großes Bild)",x.e)+
+    f("f_b","Text (bei Witz und Rätsel: die Frage)",x.k==="m"?"":x.b,"f j q s z",1)+
+    f("f_mo","Meme-Text oben",mm[0],"m")+f("f_mu","Meme-Text unten",mm[1]||"","m")+
+    f("f_a","Antwort / Lösung",x.a,"j q",1)+f("f_h","Tipp (leer = kein Tipp-Button)",x.h,"q")+f("f_q","YouTube-Suchbegriff",x.k==="s"?x.q:"","s")+
+    (pic?'<label class="chk"><input type="checkbox" id="f_pic" checked> Gezeichnetes Bild behalten</label>':'')+
+    '<label class="chk"><input type="checkbox" id="f_hl"'+(x.hl?' checked':'')+'> In der Übersicht hervorheben (goldener Rahmen)</label>'+
+    '<label class="chk"><input type="checkbox" id="f_qz"'+(x.qr?' checked':'')+'> Quiz-Kasten mit QR-Code anzeigen</label>'+
+    '<div id="qzbox" class="qzbox">'+f("f_ql","Link zum Quiz (https://…)",x.ql)+f("f_qt","Text im Quiz-Kasten",x.qt,"",1)+
+    '<label class="fld">QR-Code-Bild '+(x.qr?'(nur zum Ersetzen auswählen)':'')+'<input type="file" id="f_qf" accept="image/*" class="inp"></label><img id="f_qi" class="qrprev" alt="QR-Code-Vorschau"'+(x.qr?' src="'+qrSrc(x.qr)+'"':'')+'></div>'+
+    '<p class="note">Fett schreiben: &lt;b&gt;Text&lt;/b&gt;</p><p class="err" id="fe"></p>'+
+    '<div class="row"><button class="btn alt" type="button" id="fx">Abbrechen</button><button class="btn" type="submit">💾 Speichern</button></div></form>';
+  ov.classList.add("on");card.scrollTop=0;
+  var ks=$("f_k");
+  function upd(){var k=ks.value;Array.prototype.forEach.call(card.querySelectorAll("[data-for]"),function(r){r.style.display=r.getAttribute("data-for").split(" ").indexOf(k)>=0?"":"none"});$("qzbox").style.display=$("f_qz").checked?"":"none"}
+  ks.onchange=upd;$("f_qz").onchange=upd;upd();
+  $("f_qf").onchange=function(){var fl=this.files&&this.files[0];if(!fl)return;var rd=new FileReader();
+    rd.onload=function(){var im=new Image();im.onload=function(){var s=Math.min(1,600/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);var g=c.getContext("2d");g.imageSmoothingEnabled=false;g.fillStyle="#fff";g.fillRect(0,0,c.width,c.height);g.drawImage(im,0,0,c.width,c.height);nq=c.toDataURL("image/png");$("f_qi").src=nq;$("fe").textContent=""};im.onerror=function(){$("fe").textContent="Das Bild konnte nicht gelesen werden."};im.src=rd.result};
+    rd.readAsDataURL(fl)};
+  $("fx").onclick=function(){editing=false;show(n)};
+  $("ef").onsubmit=function(e){e.preventDefault();
+    var k=ks.value,v=function(i){var el=$(i);return el?el.value.trim():""};
+    var y={k:k,t:v("f_t")||("Türchen "+n),e:v("f_e")||"🎄"};
+    y.b=k==="m"?v("f_mo")+"|"+v("f_mu"):v("f_b");
+    if(k==="j"||k==="q")y.a=v("f_a");
+    if(k==="q"&&v("f_h"))y.h=v("f_h");
+    if(k==="s")y.q=v("f_q");
+    if($("f_hl").checked)y.hl=1;
+    if($("f_qz").checked){var q=nq||x.qr,l=v("f_ql");
+      if(!q){$("fe").textContent="Bitte ein QR-Code-Bild auswählen.";return}
+      if(l&&!/^https?:\/\//i.test(l)){$("fe").textContent="Der Link muss mit https:// beginnen.";return}
+      y.qr=q;if(l)y.ql=l;if(v("f_qt"))y.qt=v("f_qt")}
+    if($("f_pic")&&!$("f_pic").checked){delete AR[n];delete MR[n]}
+    D[n-1]=y;editing=false;persist();show(n)};
+}
+var taps=0,tapT=0;
+document.querySelector("header h1").addEventListener("click",function(){var t=Date.now();taps=(t-tapT<1500)?taps+1:1;tapT=t;if(taps>=5){taps=0;login()}});
+
+var st=ls("advAdmin"),dd=draft();
+if(st&&(st===ADMIN_HASH||(dd&&st===dd.H)))enter();
+else{draw();route();if(/[?&]admin\b/.test(location.search))login()}
+})();
+</script>
+</body>
+</html>
